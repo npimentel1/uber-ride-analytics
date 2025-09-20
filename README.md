@@ -2,9 +2,9 @@
 # Uber Ride Analytics
 
 
-Análise de dados de corridas do Uber. Os dados utilizados foram obtidos do Kaggle, processados e carregados em um banco de dados SQL Server.
+##### *Projeto ainda em construção*
 
-##### ***O projeto ainda está em construção***
+Análise de dados de corridas do Uber. Os dados utilizados foram obtidos do Kaggle, processados e carregados em um banco de dados SQL Server.
 
 
 ## Tecnologias utilizadas
