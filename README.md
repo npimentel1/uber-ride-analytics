@@ -20,7 +20,7 @@ Realizar análise exploratória dos dados do dataset e responder as seguintes pe
 - Quais os principais GAPs na oferta x demanda?
 - Análise da taxa de cancelamento (motorista e usuário)
 - Avaliação de receita x método de pagamento x tipo de veículo
-- Buscar correlação dos indicadores VTAT/CTAT
+- Buscar correlação dos indicadores VTAT/CTAT com os motivos de cancelamento
 - Analisar o comportamento dos indicadores com clientes e motoristas com avaliações <= 3
 
 
