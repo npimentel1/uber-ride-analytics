@@ -35,6 +35,10 @@ O resultado final foi consolidado em um **case de estudo em PDF**, simulando um 
 
 ---
 
+[📄 Ver Relatório Final](./report/Uber_Ride_Analytics.pdf)
+
+---
+
 ## ⚙️ Stack Tecnológica
 
 | Tecnologia | Função Principal |
