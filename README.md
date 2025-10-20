@@ -35,7 +35,9 @@ O resultado final foi consolidado em um **case de estudo em PDF**, simulando um 
 
 ---
 
-[📄 Ver Relatório Final](./report/Uber_Ride_Analytics.pdf)
+## Link direto para o relatório final
+
+[📄 Ver Relatório Final](https://github.com/npimentel1/uber-ride-analytics/blob/main/report/Nikollas_Pimentel__Analista_de_dados.pdf)
 
 ---
 
