@@ -1,54 +1,68 @@
+# 🚖 Uber Ride Analytics — Data Analysis Project
+
 ![Uber Ride Analytics](https://marketing.dcassetcdn.com/blog/2018/September/Uber-Wordmark/DI_Uber-Wordmark_Banner_828x300.jpg)
 
-## Dataset
+## 📄 Visão Geral
 
-Nome: Uber Ride Analytics
+Projeto de **análise de dados de corridas Uber**, com foco em entender o comportamento das viagens, impacto financeiro das corridas incompletas e padrões de sazonalidade.  
+Os dados foram extraídos do Kaggle e processados em **SQL Server**, com apoio de **Python** e **Excel** para validação e visualização inicial.  
+O resultado final foi consolidado em um **case de estudo em PDF**, simulando um *executive report* de negócio.
 
-[Fonte/Dataset](https://www.kaggle.com/datasets/yashdevladdha/uber-ride-analytics-dashboard/data)
+> ⚠️ *Este projeto tem fins exclusivamente educacionais e demonstrativos.*
 
-[Autor](https://www.kaggle.com/yashdevladdha)
+---
 
-[Licença do dataset](https://creativecommons.org/licenses/by-sa/4.0/)
+## 📊 Dataset
 
-⚠️ Importante: o dataset não é de minha autoria, e o uso aqui é apenas para fins educacionais e demonstração de habilidades.
+- **Nome:** Uber Ride Analytics  
+- **Fonte:** [Kaggle - Uber Ride Analytics Dashboard](https://www.kaggle.com/datasets/yashdevladdha/uber-ride-analytics-dashboard/data)  
+- **Autor:** [Yash Devladdha](https://www.kaggle.com/yashdevladdha)  
+- **Licença:** [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)  
 
-</br>
+**Observação sobre dados faltantes:**  
+> Os valores ausentes seguem o padrão lógico de geração de dados: `Booking Value` é nulo quando há cancelamento, pois não há faturamento.  
+> Nenhum tratamento de imputação foi realizado, pois a ausência é **semântica e esperada**.
 
-##### *Projeto ainda em construção*
+---
 
-Análise de dados de corridas do Uber. Os dados utilizados foram obtidos do Kaggle e carregados em um banco de dados SQL Server, onde serão processados e preparados para análise no Excel.
+## 🧠 Objetivos da Análise
 
-</br>
+- 💵 Medir a **receita total** das corridas concluídas em 2024.  
+- 🚫 Avaliar o **impacto financeiro** das corridas **incompletas e canceladas**.  
+- 📈 Investigar o comportamento do **ticket médio e da distância percorrida** ao longo do ano.  
+- ⏰ Identificar **faixas horárias** com maior incidência de cancelamentos e incompletas.  
+- 🚗 Comparar a performance por **tipo de veículo** (Auto, Sedan, Premier, etc).
 
-## Tecnologias utilizadas
+---
 
-- Python
-- SQL (SQL Server)
-- Excel
+## ⚙️ Stack Tecnológica
 
-## Objetivos
+| Tecnologia | Função Principal |
+|-------------|------------------|
+| **Python** | Automação de download e tratamento inicial dos dados |
+| **SQL Server (T-SQL)** | Criação de tabelas, procedures e consultas analíticas |
+| **Excel** | Análises rápidas e validação de resultados |
+| **PowerPoint** | Construção do relatório executivo em PDF |
 
-Realizar análise exploratória dos dados do dataset e responder as seguintes perguntas:
-</br>
-- Quais os principais GAPs na oferta x demanda?
-- Análise da taxa de cancelamento (motorista e usuário)
-- Avaliação de receita x método de pagamento x tipo de veículo
-- Buscar correlação dos indicadores VTAT/CTAT com os motivos de cancelamento
-- Analisar o comportamento dos indicadores com clientes e motoristas com avaliações <= 3
+---
 
+## 🧩 Estrutura do Projeto
 
-## Dependências necessárias
-
-É necessário que você tenha instalado o SQL Server no seu computador.
-
-Em relação ao Python, instale todas as dependências com:
-
-```
-pip install -r requirements.txt
-```
-
-Principais bibliotecas utilizadas:
-
-- kagglehub
-- pandas
-- os
+```bash
+Uber_Ride_Analytics/
+│
+├── src/
+│   └── download.py             # Script para baixar e carregar o dataset
+│
+├── sql/
+│   ├── create_table.sql        # Criação da tabela base
+│   ├── create_procedure_bulk_insert.sql  # Procedure para carga em massa
+│   ├── analise.sql             # Consultas usadas na análise e no PDF
+│   └── exec.sql                # Execução das procedures e inserts
+│
+├── report/
+│   └── Uber_Ride_Analytics.pdf # Case final em formato de relatório
+│
+├── requirements.txt
+├── README.md
+└── base_uber.csv
