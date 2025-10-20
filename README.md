@@ -19,7 +19,7 @@ O resultado final foi consolidado em um **case de estudo em PDF**, simulando um 
 - **Autor:** [Yash Devladdha](https://www.kaggle.com/yashdevladdha)  
 - **Licença:** [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)  
 
-**Observação sobre dados faltantes:**  
+**Observação sobre dados faltantes no dataset:**  
 > Os valores ausentes seguem o padrão lógico de geração de dados: `Booking Value` é nulo quando há cancelamento, pois não há faturamento.  
 > Nenhum tratamento de imputação foi realizado, pois a ausência é **semântica e esperada**.
 
