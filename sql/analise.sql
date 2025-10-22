@@ -13,7 +13,7 @@ SELECT CASE WHEN booking_status = 'Completed' THEN 'Concluídas'
             WHEN booking_status = 'Incomplete' THEN 'Incompletas' ELSE 'Canceladas' END AS 'status_cluster'
     ,SUM(booking_value) AS 'receita'
     ,COUNT(*) AS 'total_de_corridas'
-    ,REPLACE(CONVERT(VARCHAR, ROUND(((CONVERT(FLOAT, COUNT(*)) / SUM(COUNT(*)) OVER()) * 100),2)), '.', ',') + '%' AS 'percentual_de_corridas' -- Formato adaptado para pt-BR
+    ,CONVERT(FLOAT, COUNT(*)) / SUM(COUNT(*)) OVER() AS 'percentual_de_corridas' -- Formato adaptado para pt-BR
     ,AVG(booking_value) AS 'ticket_medio'
 FROM dbo.tb_uber_ride_analytics
 GROUP BY CASE WHEN booking_status = 'Completed' THEN 'Concluídas'
@@ -32,8 +32,8 @@ GO
 SELECT incomplete_rides_reason
     ,COUNT(*) AS 'total_de_corridas'
     ,SUM(booking_value) AS 'receita'
-    ,REPLACE(CONVERT(VARCHAR, ROUND(((CONVERT(FLOAT, COUNT(*)) / SUM(COUNT(*)) OVER()) * 100),2)), '.', ',') + '%' AS 'percentual_de_corridas'
-    ,REPLACE(CONVERT(VARCHAR, ROUND(((CONVERT(FLOAT, SUM(booking_value)) / SUM(SUM(booking_value)) OVER()) * 100),2)), '.', ',') + '%' AS 'percentual_de_receita'
+    ,CONVERT(FLOAT, COUNT(*)) / SUM(COUNT(*)) OVER()  AS 'percentual_de_corridas'
+    ,CONVERT(FLOAT, SUM(booking_value)) / SUM(SUM(booking_value)) OVER()  AS 'percentual_de_receita'
     ,AVG(booking_value) AS 'ticket_medio'
     ,AVG(avg_vtat) AS 'avg_vtat'
     ,AVG(avg_ctat) AS 'avg_ctat'
@@ -96,7 +96,7 @@ ORDER BY MONTH(data); -- Não se faz necessário aplicar o CASE WHEN pois só pr
 GO
 
 
-
+-- Slide 8: Corridas, Receita, Ticket Médio e Distância Média
 -- Análise mensal das viagens concluídas
 -- Levantando o ticket médio, a distância média percorrida por mês e a distância média total
 -- A distância média total é calculada utilizando a função de janela AVG() OVER()
@@ -123,19 +123,7 @@ ORDER BY MONTH(data); -- Não se faz necessário aplicar o CASE WHEN pois só pr
 GO
 
 
--- Slide 8: Análise de Corridas por Tipo de Veículo
-
--- Análise de corridas por tipo de veículo
--- Levantando o total de corridas, receita, ticket médio e percentual de corridas por tipo de veículo
-SELECT vehicle_type
-    ,COUNT(*) AS 'total_de_corridas'
-    ,SUM(booking_value) AS 'receita'
-    ,AVG(booking_value) AS 'ticket_medio'
-    ,REPLACE(CONVERT(VARCHAR, ROUND(((CONVERT(FLOAT, COUNT(*)) / SUM(COUNT(*)) OVER()) * 100),2)), '.', ',') + '%' AS 'percentual_de_corridas'
-FROM dbo.tb_uber_ride_analytics
-GROUP BY vehicle_type
-ORDER BY COUNT(*) DESC;
-
+-- Slide 8: Corridas, Receita, Ticket Médio e Distância Média
 -- Calculando o ticket médio geral e distância média geral nos meses de Janeiro, Julho e Outubro
 WITH base AS (
 SELECT CASE WHEN MONTH(data) = 1 THEN 'Jan'
@@ -175,3 +163,16 @@ SELECT meses
     ,REPLACE(CONVERT(VARCHAR, ROUND(((ticket_medio_meses / ticket_medio_ano) - 1) * 100,2)), '.', ',') + '%' AS 'dif_ticket_medio'
     ,REPLACE(CONVERT(VARCHAR, ROUND(((distancia_media_meses / distancia_media_ano) - 1) * 100,2)), '.', ',') + '%' AS 'dif_distancia_media'
 FROM base_final
+
+
+-- Slide 9: Análise por Tipo de Veículo
+-- Levantando o total de corridas, receita, ticket médio e percentual de corridas por tipo de veículo
+-- Entendendo como pode ser realizada a clusterização por tipo de veículo
+SELECT vehicle_type
+    ,COUNT(*) AS 'total_de_corridas'
+    ,SUM(booking_value) AS 'receita'
+    ,AVG(booking_value) AS 'ticket_medio'
+    ,CONVERT(FLOAT, COUNT(*)) / SUM(COUNT(*)) OVER() AS 'percentual_de_corridas'
+FROM dbo.tb_uber_ride_analytics
+GROUP BY vehicle_type
+ORDER BY COUNT(*) DESC;
